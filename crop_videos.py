@@ -1,3 +1,4 @@
+from hashlib import new
 from ipaddress import AddressValueError
 import sys
 import moviepy
@@ -38,12 +39,9 @@ def extract_interesting_sections(interesting_sections):
         ###"remplacer par toutes les videos présentent dans le dossier", a trier imperativement pour les portions partagées
         ###
         #try : 
-        
         availabe_video["names"]=name
         availabe_video["start time"]=(name.split(".mp4")[0].split("_")[-2])[:-6]+" "+(name.split(".mp4")[0].split("_")[-2])[-6:-4]+":"+(name.split(".mp4")[0].split("_")[-2])[-4:-2]+":"+(name.split(".mp4")[0].split("_")[-2])[-2:] #for name in  availabe_videos["names"].values]
         availabe_video["end time"]=(name.split(".mp4")[0].split("_")[-1])[:-6]+" "+(name.split(".mp4")[0].split("_")[-1])[-6:-4]+":"+(name.split(".mp4")[0].split("_")[-1])[-4:-2]+":"+(name.split(".mp4")[0].split("_")[-1])[-2:]  #for name in  availabe_videos["names"].values]
-        print("*****", availabe_video)
-        
         availabe_videos =availabe_videos.append(availabe_video, ignore_index=True)#pd.concat ([availabe_videos, availabe_video], axis=1,ignore_index=True)
         
         """ except:
@@ -51,7 +49,6 @@ def extract_interesting_sections(interesting_sections):
         """
     availabe_videos["start time"] = pd.to_datetime(availabe_videos['start time'],infer_datetime_format=True) # format ='%y%m%d %H:%M:%S')
     availabe_videos["end time"] = pd.to_datetime(availabe_videos['end time'],infer_datetime_format=True) 
-    print(availabe_videos.head())
 
     #############                                 ###########
     #############        Extracting videos        ###########
@@ -73,20 +70,14 @@ def extract_interesting_sections(interesting_sections):
     print(convert(n))
 
     def crop_video(video_name, new_name, start, end):
-        name_file = datetime.now().strftime("%b %d %Y %H:%M:%S")+".mp4"
-        os.system('cmd /c "ffmpeg -i '+video_name+' -ss '+ convert(start)+' -to '+convert(end)+' -c:v copy -c:a copy tmp/'+name_file+'"')
-        #video = VideoFileClip(video_name).subclip(start,end)
-        return 0 #video
+        video = VideoFileClip(video_name).subclip(start,end)
+        return video
         
 
     def search_interesting_section (interesting_section):
         for video_idx, availabe_video in availabe_videos.iterrows():
-            #print("_ch"+str(interesting_section["station"])+"_")
             if "_ch"+str(interesting_section["station"])+"_" in availabe_video["names"] :
-                #print("dispo",availabe_video["names"])
                 if interesting_section["start visit dateTime"]>= availabe_video["start time"] and interesting_section["start visit dateTime"] <= availabe_video["end time"]:
-                    #print(availabe_video["end time"], interesting_section["start visit dateTime"], interesting_section["end visit dateTime"], availabe_video["start time"])
-                    #print((availabe_video["start time"] - interesting_section["start visit dateTime"]). total_seconds() )
                     print("hi",availabe_video["names"])
                     
                     print(interesting_section["start visit dateTime"]>= availabe_video["start time"], interesting_section["start visit dateTime"], availabe_video["start time"])
@@ -106,14 +97,14 @@ def extract_interesting_sections(interesting_sections):
                         rest_video = search_interesting_section (rest_interesting_section)
 
                         if rest_video!=None:
-                            file = open("tmp/mylist.txt", "w") 
+                            """file = open("tmp/mylist.txt", "w") 
                             file.write(video+"\n") 
                             file.write(rest_video+"\n")
                             file.close() 
                             final = datetime.now().strftime("%b %d %Y %H:%M:%S")+".mp4"
                             os.system('cmd /c "ffmpeg -f concat -safe 0 -i mylist.txt -c copy'+final+'"')
-        
-                            #final = concatenate_videoclips([video, rest_video])
+                            """
+                            final = concatenate_videoclips([video, rest_video])
                             return final
                         else:
                             return video
@@ -131,22 +122,19 @@ def extract_interesting_sections(interesting_sections):
     for root, dirs, files in os.walk(path):
         for file in files:
             #append the file name to the list
-            print(file)
+            #print(file)
             filelist.append(os.path.join(root,file))
 
 
     for section_idx, interesting_section in interesting_sections.iterrows():
-        print("*****",interesting_section)
-        #enlever le _ a coté de ch
+        #print("*****",interesting_section)
         new_name="vealnum_"+str(interesting_section["calfNumber"])+"_ch"+str(interesting_section["station"])+"_from_"+interesting_section["start visit dateTime"].strftime("%d%m%Y%H%M%S")+"__to__"+interesting_section["end visit dateTime"].strftime("%d%m%Y%H%M%S")
-        #path = "ch_"+str(interesting_section["station"])+"/"+interesting_section["start visit dateTime"].strftime("%d%m%Y")+"/"+str(interesting_section["calfNumber"])
         path= "../../sante_veau/dataset/coupure_video_veaux/"+interesting_section["start visit dateTime"].strftime("%d%m%Y")
 
-        if new_name+".mp4" not in filelist and interesting_section["start visit dateTime"] >= datetime(2022, 2, 20) and interesting_section["start visit dateTime"] <= datetime(2022, 3, 13):
+        if new_name+".mp4" not in filelist and interesting_section["start visit dateTime"] >= datetime(2022, 2, 27) and interesting_section["start visit dateTime"] <= datetime(2022, 2, 28):
             
             video= search_interesting_section(interesting_section)
-            print("******************************************we are in")
-            break
+            print("******************************************we are on", new_name)
             if video!=None :
                 print("an intersting section")
                 path = "../../sante_veau/dataset/coupure_video_veaux/"+interesting_section["start visit dateTime"].strftime("%d%m%Y")
@@ -163,38 +151,61 @@ def extract_interesting_sections(interesting_sections):
 
                 #os.system('cmd /c "cp "')
                 video.write_videofile("../../sante_veau/dataset/coupure_video_veaux/"+interesting_section["start visit dateTime"].strftime("%d%m%Y")+"/"+new_name+".mp4",fps=25)
-                print("******created","videos/"+new_name, "***********FPS",video.fps)
+                print("******created","sante_veau/dataset/coupure_video_veaux/"+interesting_section["start visit dateTime"].strftime("%d%m%Y")+"/"+new_name, "***********FPS",video.fps)
 
 import copy
 interesting_sections=pd.read_csv("../louves/visits_point.csv", sep=";")
 interesting_sections=interesting_sections.loc[interesting_sections['Duration'] !=0]
 interesting_sections=interesting_sections[["date", "station", "Duration", "calfNumber","feederLong"]]
 #### We will replace station to be the number corresponding to the x on ch_x on each video#####
-interesting_sections.loc[(interesting_sections["station"]==1) & (interesting_sections["feederLong"]=="DAL 2 (2496)"), 'station']="9" #louve 3
-interesting_sections.loc[(interesting_sections["station"]==2) & (interesting_sections["feederLong"]=="DAL 2 (2496)"), 'station']="10" #louve4
-interesting_sections.loc[(interesting_sections["station"]==2) & (interesting_sections["feederLong"]=="DAL 1 (2494)"), 'station']="1"  #louve 2 
-interesting_sections.loc[(interesting_sections["station"]==1) & (interesting_sections["feederLong"]=="DAL 1 (2494)"), 'station']="2" #louve 1
+interesting_sections.loc[(interesting_sections["station"]==1) & (interesting_sections["feederLong"]=="DAL 2 (2496)"), 'parc']="9" #louve 3
+interesting_sections.loc[(interesting_sections["station"]==2) & (interesting_sections["feederLong"]=="DAL 2 (2496)"), 'parc']="10" #louve4
+interesting_sections.loc[(interesting_sections["station"]==2) & (interesting_sections["feederLong"]=="DAL 1 (2494)"), 'parc']="1"  #louve 2 
+interesting_sections.loc[(interesting_sections["station"]==1) & (interesting_sections["feederLong"]=="DAL 1 (2494)"), 'parc']="2" #louve 1
+interesting_sections["station"]=interesting_sections["parc"]
 #interesting_sections["station"] =interesting_sections["station"].replace([1,2],[2,1])
 
 interesting_sections["start visit dateTime"]= pd.to_datetime(interesting_sections["date"])
-All = copy.deepcopy(interesting_sections)
+#All = copy.deepcopy(interesting_sections)
 #interesting_sections =interesting_sections#[interesting_sections["feederLong"]=="DAL 1 (2494)"]
 
 interesting_sections["end visit dateTime"]= interesting_sections["start visit dateTime"] + pd.to_timedelta(interesting_sections['Duration']+90, unit='s')+ pd.to_timedelta(6, unit='h')
 interesting_sections["start visit dateTime"]= pd.to_datetime(interesting_sections["date"])- pd.to_timedelta(90, unit='s') + pd.to_timedelta(6, unit='h')#.agg(' '.join, axis=1))#.dt.time
+interesting_sections = interesting_sections.sort_values(by='station',ascending=True)
+interesting_sections = interesting_sections.sort_values(by='calfNumber',ascending=True)
+interesting_sections = interesting_sections.sort_values(by='start visit dateTime',ascending=True)
 
+interesting_sections.reset_index(drop=True, inplace=True)
 
-interesting_sections = interesting_sections.sort_values(by='start visit dateTime')
-interesting_sections = interesting_sections.sort_values(by='station')
+"""for station in np.unique(interesting_sections["station"]):
+    print(interesting_sections.loc[interesting_sections["station"]==station])
+    for calfNumber in np.unique(interesting_sections.loc[interesting_sections["station"]==station]["calfNumber"]):
+        for idx in interesting_sections.loc[(interesting_sections["station"]==station)&(interesting_sections["station"]==station)].index.values(:-1):
+
+            if interesting_sections.loc[(interesting_sections["station"]==station)&(interesting_sections["station"]==station)][idx]
+"""
+for idx in interesting_sections.index.values[:-1] :
+    if interesting_sections.iloc[idx]["calfNumber"]== interesting_sections.iloc[idx+1]["calfNumber"] and interesting_sections.iloc[idx]["end visit dateTime"]>= interesting_sections.iloc[idx+1]["start visit dateTime"]:  # en gros 90s + 90s de marge d'après les lignes 175 ete 176
+        interesting_sections.iloc[idx+1]["Duration"] += interesting_sections.iloc[idx]["Duration"]
+        interesting_sections.iloc[idx+1]["start visit dateTime"] =  interesting_sections.iloc[idx]["start visit dateTime"]
+        interesting_sections.drop(index=idx)
+        print ("********************************il y'avait des visites proches pour cette ligne ",interesting_sections.iloc[idx+1])
+        print("***********************************")
+        #interesting_sections=interesting_sections.loc[interesting_sections["calfNumber"].shift(-1) != interesting_sections["calfNumber"]]  #compiler les visites succéssives du même animal 
+"""
+interesting_sections.reset_index(drop=True, inplace=True)
+interesting_sections = interesting_sections.sort_values(by='start visit dateTime',ascending=True)
 
 extract_interesting_sections(interesting_sections)
 
 
-"""interesting_sections= copy.deepcopy(All)
+***************************
+interesting_sections= copy.deepcopy(All)
+
 interesting_sections =interesting_sections[interesting_sections["feederLong"]=="DAL 2 (2496)"]
 interesting_sections.loc[ (interesting_sections["feederLong"]=="DAL 2 (2496)"), "end visit dateTime"]= interesting_sections["start visit dateTime"] + pd.to_timedelta(interesting_sections['Duration']+90, unit='s') + pd.to_timedelta(6, unit='h')
 interesting_sections.loc[ (interesting_sections["feederLong"]=="DAL 2 (2496)"), "start visit dateTime"]= pd.to_datetime(interesting_sections["date"])- pd.to_timedelta(90, unit='s') + pd.to_timedelta(6, unit='h')#.agg(' '.join, axis=1))#.dt.time
-
+"""
 extract_interesting_sections(interesting_sections)
 """
     
