@@ -1,42 +1,0 @@
-[]
-hi ../../sante_veau/videos/All_videos/N862A6_ch9_main_20220219210008_20220219220000.mp4
-True 2022-02-19 21:55:30 2022-02-19 21:00:08
-** 3322.0 3515.0 the rest is -77.0
-we crop
-an intersting section
-Moviepy - Building video ../../sante_veau/dataset/coupure_video_veaux/ch_9/6355/vealnum_6355_ch9_from_19022022215530__to__19022022215843.mp4.
-MoviePy - Writing audio in vealnum_6355_ch9_from_19022022215530__to__19022022215843TEMP_MPY_wvf_snd.mp3
-chunk:   0%|          | 0/4256 [00:00<?, ?it/s, now=None]chunk:   0%|          | 2/4256 [00:00<05:34, 12.70it/s, now=None]chunk:   2%|▏         | 69/4256 [00:00<00:12, 323.70it/s, now=None]chunk:   5%|▌         | 227/4256 [00:00<00:04, 829.99it/s, now=None]chunk:   9%|▊         | 366/4256 [00:00<00:03, 1033.50it/s, now=None]chunk:  12%|█▏        | 511/4256 [00:00<00:03, 1145.63it/s, now=None]chunk:  16%|█▌        | 664/4256 [00:00<00:02, 1259.91it/s, now=None]chunk:  19%|█▉        | 817/4256 [00:00<00:02, 1325.57it/s, now=None]chunk:  23%|██▎       | 964/4256 [00:00<00:02, 1367.69it/s, now=None]chunk:  26%|██▋       | 1127/4256 [00:00<00:02, 1447.31it/s, now=None]chunk:  30%|██▉       | 1276/4256 [00:01<00:02, 1456.54it/s, now=None]chunk:  34%|███▍      | 1448/4256 [00:01<00:01, 1531.67it/s, now=None]chunk:  38%|███▊      | 1602/4256 [00:01<00:01, 1513.21it/s, now=None]chunk:  41%|████▏     | 1762/4256 [00:01<00:01, 1537.06it/s, now=None]chunk:  45%|████▌     | 1920/4256 [00:01<00:01, 1549.24it/s, now=None]chunk:  49%|████▉     | 2076/4256 [00:01<00:01, 1546.44it/s, now=None]chunk:  52%|█████▏    | 2231/4256 [00:01<00:01, 1542.90it/s, now=None]chunk:  56%|█████▌    | 2386/4256 [00:01<00:01, 1511.95it/s, now=None]chunk:  60%|█████▉    | 2538/4256 [00:01<00:01, 1512.00it/s, now=None]chunk:  63%|██████▎   | 2701/4256 [00:01<00:01, 1543.55it/s, now=None]chunk:  67%|██████▋   | 2860/4256 [00:02<00:00, 1556.04it/s, now=None]chunk:  71%|███████   | 3016/4256 [00:02<00:00, 1512.63it/s, now=None]chunk:  75%|███████▍  | 3185/4256 [00:02<00:00, 1561.71it/s, now=None]chunk:  79%|███████▊  | 3342/4256 [00:02<00:00, 1553.51it/s, now=None]chunk:  82%|████████▏ | 3509/4256 [00:02<00:00, 1586.91it/s, now=None]chunk:  86%|████████▌ | 3668/4256 [00:02<00:00, 1560.20it/s, now=None]chunk:  90%|████████▉ | 3825/4256 [00:02<00:00, 1551.28it/s, now=None]chunk:  94%|█████████▎| 3984/4256 [00:02<00:00, 1562.09it/s, now=None]chunk:  97%|█████████▋| 4141/4256 [00:02<00:00, 1563.33it/s, now=None]                                                                      MoviePy - Done.
-Moviepy - Writing video ../../sante_veau/dataset/coupure_video_veaux/ch_9/6355/vealnum_6355_ch9_from_19022022215530__to__19022022215843.mp4
-
-t:   0%|          | 0/386 [00:00<?, ?it/s, now=None]t:   1%|          | 2/386 [00:00<00:27, 13.93it/s, now=None]Traceback (most recent call last):
-  File "/project/166600234/sophie/our_virtual_envs/dlc/venv/lib/python3.8/site-packages/moviepy/video/io/ffmpeg_writer.py", line 136, in write_frame
-    self.proc.stdin.write(img_array.tobytes())
-BrokenPipeError: [Errno 32] Broken pipe
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "crop_videos.py", line 139, in <module>
-    video.write_videofile("../../sante_veau/dataset/coupure_video_veaux/"+"ch_"+str(interesting_section["station"])+"/"+str(interesting_section["calfNumber"])+"/"+new_name+".mp4",fps=2)
-  File "<decorator-gen-55>", line 2, in write_videofile
-  File "/project/166600234/sophie/our_virtual_envs/dlc/venv/lib/python3.8/site-packages/moviepy/decorators.py", line 54, in requires_duration
-    return f(clip, *a, **k)
-  File "<decorator-gen-54>", line 2, in write_videofile
-  File "/project/166600234/sophie/our_virtual_envs/dlc/venv/lib/python3.8/site-packages/moviepy/decorators.py", line 135, in use_clip_fps_by_default
-    return f(clip, *new_a, **new_kw)
-  File "<decorator-gen-53>", line 2, in write_videofile
-  File "/project/166600234/sophie/our_virtual_envs/dlc/venv/lib/python3.8/site-packages/moviepy/decorators.py", line 22, in convert_masks_to_RGB
-    return f(clip, *a, **k)
-  File "/project/166600234/sophie/our_virtual_envs/dlc/venv/lib/python3.8/site-packages/moviepy/video/VideoClip.py", line 300, in write_videofile
-    ffmpeg_write_video(self, filename, fps, codec,
-  File "/project/166600234/sophie/our_virtual_envs/dlc/venv/lib/python3.8/site-packages/moviepy/video/io/ffmpeg_writer.py", line 228, in ffmpeg_write_video
-    writer.write_frame(frame)
-  File "/project/166600234/sophie/our_virtual_envs/dlc/venv/lib/python3.8/site-packages/moviepy/video/io/ffmpeg_writer.py", line 180, in write_frame
-    raise IOError(error)
-OSError: [Errno 32] Broken pipe
-
-MoviePy error: FFMPEG encountered the following error while writing file ../../sante_veau/dataset/coupure_video_veaux/ch_9/6355/vealnum_6355_ch9_from_19022022215530__to__19022022215843.mp4:
-
- b'../../sante_veau/dataset/coupure_video_veaux/ch_9/6355/vealnum_6355_ch9_from_19022022215530__to__19022022215843.mp4: No such file or directory\n'
-                                                            
