@@ -127,11 +127,11 @@ def extract_interesting_sections(interesting_sections):
 
 
     for section_idx, interesting_section in interesting_sections.iterrows():
-        #print("*****",interesting_section)
+        print("*****",interesting_section)
         new_name="vealnum_"+str(interesting_section["calfNumber"])+"_ch"+str(interesting_section["station"])+"_from_"+interesting_section["start visit dateTime"].strftime("%d%m%Y%H%M%S")+"__to__"+interesting_section["end visit dateTime"].strftime("%d%m%Y%H%M%S")
         path= "../../sante_veau/dataset/coupure_video_veaux/"+interesting_section["start visit dateTime"].strftime("%d%m%Y")
 
-        if new_name+".mp4" not in filelist and interesting_section["start visit dateTime"] >= datetime(2022, 2, 27) and interesting_section["start visit dateTime"] <= datetime(2022, 2, 28):
+        if new_name+".mp4" not in filelist and pd.to_datetime(interesting_section["start visit dateTime"].date()) in [ datetime(2022, 3, 13)]:#,datetime(2022, 2, 20), datetime(2022, 2, 27) datetime(2022, 3, 6), datetime(2022, 3,13)] :
             
             video= search_interesting_section(interesting_section)
             print("******************************************we are on", new_name)
@@ -174,31 +174,28 @@ interesting_sections["start visit dateTime"]= pd.to_datetime(interesting_section
 interesting_sections = interesting_sections.sort_values(by='station',ascending=True)
 interesting_sections = interesting_sections.sort_values(by='calfNumber',ascending=True)
 interesting_sections = interesting_sections.sort_values(by='start visit dateTime',ascending=True)
-
+interesting_sections=interesting_sections[[ "station", "calfNumber","end visit dateTime","start visit dateTime" ,"feederLong"]]
 interesting_sections.reset_index(drop=True, inplace=True)
 
-"""for station in np.unique(interesting_sections["station"]):
-    print(interesting_sections.loc[interesting_sections["station"]==station])
-    for calfNumber in np.unique(interesting_sections.loc[interesting_sections["station"]==station]["calfNumber"]):
-        for idx in interesting_sections.loc[(interesting_sections["station"]==station)&(interesting_sections["station"]==station)].index.values(:-1):
 
-            if interesting_sections.loc[(interesting_sections["station"]==station)&(interesting_sections["station"]==station)][idx]
-"""
+
 for idx in interesting_sections.index.values[:-1] :
     if interesting_sections.iloc[idx]["calfNumber"]== interesting_sections.iloc[idx+1]["calfNumber"] and interesting_sections.iloc[idx]["end visit dateTime"]>= interesting_sections.iloc[idx+1]["start visit dateTime"]:  # en gros 90s + 90s de marge d'après les lignes 175 ete 176
-        interesting_sections.iloc[idx+1]["Duration"] += interesting_sections.iloc[idx]["Duration"]
+        #interesting_sections.iloc[idx+1]["Duration"] += interesting_sections.iloc[idx]["Duration"]
         interesting_sections.iloc[idx+1]["start visit dateTime"] =  interesting_sections.iloc[idx]["start visit dateTime"]
         interesting_sections.drop(index=idx)
-        print ("********************************il y'avait des visites proches pour cette ligne ",interesting_sections.iloc[idx+1])
-        print("***********************************")
+        #print ("********************************il y'avait des visites proches pour cette ligne ",interesting_sections.iloc[idx],interesting_sections.iloc[idx+1])
+        #print("****************************************************************************")
         #interesting_sections=interesting_sections.loc[interesting_sections["calfNumber"].shift(-1) != interesting_sections["calfNumber"]]  #compiler les visites succéssives du même animal 
-"""
+
 interesting_sections.reset_index(drop=True, inplace=True)
 interesting_sections = interesting_sections.sort_values(by='start visit dateTime',ascending=True)
 
+
+
 extract_interesting_sections(interesting_sections)
 
-
+"""
 ***************************
 interesting_sections= copy.deepcopy(All)
 
@@ -206,6 +203,5 @@ interesting_sections =interesting_sections[interesting_sections["feederLong"]=="
 interesting_sections.loc[ (interesting_sections["feederLong"]=="DAL 2 (2496)"), "end visit dateTime"]= interesting_sections["start visit dateTime"] + pd.to_timedelta(interesting_sections['Duration']+90, unit='s') + pd.to_timedelta(6, unit='h')
 interesting_sections.loc[ (interesting_sections["feederLong"]=="DAL 2 (2496)"), "start visit dateTime"]= pd.to_datetime(interesting_sections["date"])- pd.to_timedelta(90, unit='s') + pd.to_timedelta(6, unit='h')#.agg(' '.join, axis=1))#.dt.time
 """
-extract_interesting_sections(interesting_sections)
-"""
+
     
