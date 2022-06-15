@@ -131,7 +131,7 @@ def extract_interesting_sections(interesting_sections):
         new_name="vealnum_"+str(interesting_section["calfNumber"])+"_ch"+str(interesting_section["station"])+"_from_"+interesting_section["start visit dateTime"].strftime("%d%m%Y%H%M%S")+"__to__"+interesting_section["end visit dateTime"].strftime("%d%m%Y%H%M%S")
         path= "../../sante_veau/dataset/coupure_video_veaux/"+interesting_section["start visit dateTime"].strftime("%d%m%Y")
 
-        if new_name+".mp4" not in filelist and pd.to_datetime(interesting_section["start visit dateTime"].date()) in [ datetime(2022, 3, 13)]:#,datetime(2022, 2, 20), datetime(2022, 2, 27) datetime(2022, 3, 6), datetime(2022, 3,13)] :
+        if new_name+".mp4" not in filelist and pd.to_datetime(interesting_section["start visit dateTime"].date()) in [ datetime(2022, 3, 13)] and 6371 in new_name:#,datetime(2022, 2, 20), datetime(2022, 2, 27) datetime(2022, 3, 6), datetime(2022, 3,13)] :
             
             video= search_interesting_section(interesting_section)
             print("******************************************we are on", new_name)
@@ -165,7 +165,7 @@ interesting_sections.loc[(interesting_sections["station"]==1) & (interesting_sec
 interesting_sections["station"]=interesting_sections["parc"]
 #interesting_sections["station"] =interesting_sections["station"].replace([1,2],[2,1])
 
-interesting_sections["start visit dateTime"]= pd.to_datetime(interesting_sections["date"])
+interesting_sections["start visit dateTime"]= copy.deepcopy(pd.to_datetime(interesting_sections["date"]))
 #All = copy.deepcopy(interesting_sections)
 #interesting_sections =interesting_sections#[interesting_sections["feederLong"]=="DAL 1 (2494)"]
 
