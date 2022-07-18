@@ -1,0 +1,2 @@
+  File "crop_videos.py", line 15
+SyntaxError: Non-ASCII character '\xc3' in file crop_videos.py on line 15, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details

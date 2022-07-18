@@ -65,9 +65,7 @@ def extract_interesting_sections(interesting_sections):
         
         return "%d:%02d:%02d" % (hour, minutes, seconds)
         
-    # Driver program
-    n = 12345
-    print(convert(n))
+
 
     def crop_video(video_name, new_name, start, end):
         video = VideoFileClip(video_name).subclip(start,end)
@@ -122,16 +120,19 @@ def extract_interesting_sections(interesting_sections):
     for root, dirs, files in os.walk(path):
         for file in files:
             #append the file name to the list
-            #print(file)
+            
             filelist.append(os.path.join(root,file))
+        
 
 
     for section_idx, interesting_section in interesting_sections.iterrows():
-        print("*****",interesting_section)
+        #print("*****",interesting_section)
         new_name="vealnum_"+str(interesting_section["calfNumber"])+"_ch"+str(interesting_section["station"])+"_from_"+interesting_section["start visit dateTime"].strftime("%d%m%Y%H%M%S")+"__to__"+interesting_section["end visit dateTime"].strftime("%d%m%Y%H%M%S")
         path= "../../sante_veau/dataset/coupure_video_veaux/"+interesting_section["start visit dateTime"].strftime("%d%m%Y")
 
-        if new_name+".mp4" not in filelist and pd.to_datetime(interesting_section["start visit dateTime"].date()) in [ datetime(2022, 3, 13)] and 6371 in new_name:#,datetime(2022, 2, 20), datetime(2022, 2, 27) datetime(2022, 3, 6), datetime(2022, 3,13)] :
+        if (path+"/"+new_name+".mp4" not in filelist) and (pd.to_datetime(interesting_section["start visit dateTime"].date()) in [datetime(2022, 3, 6), datetime(2022, 2, 20), datetime(2022, 2, 27), datetime(2022, 3,13) ]) :#,datetime(2022, 2, 20), datetime(2022, 2, 27) datetime(2022, 3, 6), datetime(2022, 3,13)] :
+            #print(filelist)
+            print("*****",new_name+".mp4")
             
             video= search_interesting_section(interesting_section)
             print("******************************************we are on", new_name)
@@ -169,8 +170,10 @@ interesting_sections["start visit dateTime"]= copy.deepcopy(pd.to_datetime(inter
 #All = copy.deepcopy(interesting_sections)
 #interesting_sections =interesting_sections#[interesting_sections["feederLong"]=="DAL 1 (2494)"]
 
-interesting_sections["end visit dateTime"]= interesting_sections["start visit dateTime"] + pd.to_timedelta(interesting_sections['Duration']+90, unit='s')+ pd.to_timedelta(6, unit='h')
+interesting_sections["end visit dateTime"]= interesting_sections["start visit dateTime"] + pd.to_timedelta(interesting_sections['Duration']+150, unit='s') + pd.to_timedelta(6, unit='h')
 interesting_sections["start visit dateTime"]= pd.to_datetime(interesting_sections["date"])- pd.to_timedelta(90, unit='s') + pd.to_timedelta(6, unit='h')#.agg(' '.join, axis=1))#.dt.time
+#print("sophie*******",interesting_sections.loc[ (interesting_sections["date"].str.contains ("2022-03-06")) & (interesting_sections["calfNumber"]==6371) ])  #["2022-03-06" in str(interesting_sections["date"]) ])# & (interesting_sections["calfNumber"]=="6371")])
+
 interesting_sections = interesting_sections.sort_values(by='station',ascending=True)
 interesting_sections = interesting_sections.sort_values(by='calfNumber',ascending=True)
 interesting_sections = interesting_sections.sort_values(by='start visit dateTime',ascending=True)
@@ -190,8 +193,14 @@ for idx in interesting_sections.index.values[:-1] :
 
 interesting_sections.reset_index(drop=True, inplace=True)
 interesting_sections = interesting_sections.sort_values(by='start visit dateTime',ascending=True)
-
-
+interesting_sections["end visit dateTime"]=pd.to_datetime(interesting_sections["end visit dateTime"])
+interesting_sections["start visit dateTime"]=pd.to_datetime(interesting_sections["start visit dateTime"])
+interesting_sections["Duration"]= (interesting_sections["end visit dateTime"] -interesting_sections["start visit dateTime"]).dt.total_seconds()
+interesting_sections["date"]=pd.to_datetime(interesting_sections["start visit dateTime"].dt.date)
+interesting_sections =interesting_sections.where(interesting_sections["start visit datetime"].isin( [datetime(2022, 3, 6), datetime(2022, 2, 20), datetime(2022, 2, 27), datetime(2022, 3,13) ]))
+interesting_sections.to_excel("to_read_distribution.xlsx")
+print(interesting_sections.head())
+exit()
 
 extract_interesting_sections(interesting_sections)
 
