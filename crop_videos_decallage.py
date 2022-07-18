@@ -130,7 +130,7 @@ def extract_interesting_sections(interesting_sections):
         new_name="vealnum_"+str(interesting_section["calfNumber"])+"_ch"+str(interesting_section["station"])+"_from_"+interesting_section["start visit dateTime"].strftime("%d%m%Y%H%M%S")+"__to__"+interesting_section["end visit dateTime"].strftime("%d%m%Y%H%M%S")
         path= "../../sante_veau/dataset/coupure_video_veaux/"+interesting_section["start visit dateTime"].strftime("%d%m%Y")
 
-        if (path+"/"+new_name+".mp4" not in filelist) and (pd.to_datetime(interesting_section["start visit dateTime"].date()) in [datetime(2022, 3, 6), datetime(2022, 2, 20), datetime(2022, 2, 27), datetime(2022, 3,13) ]) :#,datetime(2022, 2, 20), datetime(2022, 2, 27) datetime(2022, 3, 6), datetime(2022, 3,13)] :
+        if (path+"/"+new_name+".mp4" not in filelist) and (pd.to_datetime(interesting_section["start visit dateTime"].date()) in [datetime(2022, 3, 14), datetime(2022, 3, 21) ]) :#,datetime(2022, 2, 20), datetime(2022, 2, 27) datetime(2022, 3, 6), datetime(2022, 3,13)] :
             #print(filelist)
             print("*****",new_name+".mp4")
             
