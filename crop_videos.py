@@ -27,10 +27,13 @@ def extract_interesting_sections(interesting_sections):
     #we shall store all the file names in this list
 
     filelist = []
-    for root, dirs, files in os.walk(path):
-        for file in files:
-            #append the file name to the list
-            filelist.append(os.path.join(root,file))
+    paths =["../../sante_veau/videos/2022-03-24-2022-03-29"]
+    for path in paths: 
+        for root, dirs, files in os.walk(path):
+            for file in files:
+                #append the file name to the list
+                filelist.append(os.path.join(root,file))
+
 
     for name in filelist:
         #print(name)
@@ -197,7 +200,7 @@ interesting_sections["end visit dateTime"]=pd.to_datetime(interesting_sections["
 interesting_sections["start visit dateTime"]=pd.to_datetime(interesting_sections["start visit dateTime"])
 interesting_sections["Duration"]= (interesting_sections["end visit dateTime"] -interesting_sections["start visit dateTime"]).dt.total_seconds()
 interesting_sections["date"]=pd.to_datetime(interesting_sections["start visit dateTime"].dt.date)
-interesting_sections =interesting_sections.where(interesting_sections["start visit dateTime"].isin( [datetime(2022, 3, 28),datetime(2022, 3, 6), datetime(2022, 2, 20), datetime(2022, 2, 27), datetime(2022, 3,13) ]))
+interesting_sections =interesting_sections.loc[(interesting_sections["start visit dateTime"].isin( [datetime(2022, 3, 28)]))]#,datetime(2022, 3, 6), datetime(2022, 2, 20), datetime(2022, 2, 27), datetime(2022, 3,13) ]))]
 
 
 extract_interesting_sections(interesting_sections)

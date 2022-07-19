@@ -22,15 +22,16 @@ def extract_interesting_sections(interesting_sections):
 
 
     import os
-    path ="../../sante_veau/videos/All_videos"
     availabe_videos=pd.DataFrame(columns=["names","start time","end time"])
     #we shall store all the file names in this list
 
     filelist = []
-    for root, dirs, files in os.walk(path):
-        for file in files:
-            #append the file name to the list
-            filelist.append(os.path.join(root,file))
+    paths =["../../sante_veau/videos/2022-03-12-2022-03-17","../../sante_veau/videos/2022-03-18-2022-03-23"]
+    for path in paths: 
+        for root, dirs, files in os.walk(path):
+            for file in files:
+                #append the file name to the list
+                filelist.append(os.path.join(root,file))
 
     for name in filelist:
         #print(name)
