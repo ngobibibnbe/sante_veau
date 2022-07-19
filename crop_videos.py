@@ -130,7 +130,7 @@ def extract_interesting_sections(interesting_sections):
         new_name="vealnum_"+str(interesting_section["calfNumber"])+"_ch"+str(interesting_section["station"])+"_from_"+interesting_section["start visit dateTime"].strftime("%d%m%Y%H%M%S")+"__to__"+interesting_section["end visit dateTime"].strftime("%d%m%Y%H%M%S")
         path= "../../sante_veau/dataset/coupure_video_veaux/"+interesting_section["start visit dateTime"].strftime("%d%m%Y")
 
-        if (path+"/"+new_name+".mp4" not in filelist) and (pd.to_datetime(interesting_section["start visit dateTime"].date()) in [datetime(2022, 3, 6), datetime(2022, 2, 20), datetime(2022, 2, 27), datetime(2022, 3,13) ]) :#,datetime(2022, 2, 20), datetime(2022, 2, 27) datetime(2022, 3, 6), datetime(2022, 3,13)] :
+        if (path+"/"+new_name+".mp4" not in filelist) and (pd.to_datetime(interesting_section["start visit dateTime"].date()) in [datetime(2022, 3, 28),datetime(2022, 3, 6), datetime(2022, 2, 20), datetime(2022, 2, 27), datetime(2022, 3,13) ]) :#,datetime(2022, 2, 20), datetime(2022, 2, 27) datetime(2022, 3, 6), datetime(2022, 3,13)] :
             #print(filelist)
             print("*****",new_name+".mp4")
             
@@ -197,10 +197,8 @@ interesting_sections["end visit dateTime"]=pd.to_datetime(interesting_sections["
 interesting_sections["start visit dateTime"]=pd.to_datetime(interesting_sections["start visit dateTime"])
 interesting_sections["Duration"]= (interesting_sections["end visit dateTime"] -interesting_sections["start visit dateTime"]).dt.total_seconds()
 interesting_sections["date"]=pd.to_datetime(interesting_sections["start visit dateTime"].dt.date)
-interesting_sections =interesting_sections.where(interesting_sections["start visit datetime"].isin( [datetime(2022, 3, 6), datetime(2022, 2, 20), datetime(2022, 2, 27), datetime(2022, 3,13) ]))
-interesting_sections.to_excel("to_read_distribution.xlsx")
-print(interesting_sections.head())
-exit()
+interesting_sections =interesting_sections.where(interesting_sections["start visit dateTime"].isin( [datetime(2022, 3, 28),datetime(2022, 3, 6), datetime(2022, 2, 20), datetime(2022, 2, 27), datetime(2022, 3,13) ]))
+
 
 extract_interesting_sections(interesting_sections)
 

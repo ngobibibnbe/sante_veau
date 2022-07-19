@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/project/166600234/sophie/our_virtual_envs/dlc/venv/lib/python3.8/site-packages/pandas/core/indexes/base.py", line 3621, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas/_libs/index.pyx", line 136, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 163, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 5198, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 5206, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'start visit datetime'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "crop_videos.py", line 200, in <module>
+    interesting_sections =interesting_sections.where(interesting_sections["start visit datetime"].isin( [datetime(2022, 3, 28),datetime(2022, 3, 6), datetime(2022, 2, 20), datetime(2022, 2, 27), datetime(2022, 3,13) ]))
+  File "/project/166600234/sophie/our_virtual_envs/dlc/venv/lib/python3.8/site-packages/pandas/core/frame.py", line 3505, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/project/166600234/sophie/our_virtual_envs/dlc/venv/lib/python3.8/site-packages/pandas/core/indexes/base.py", line 3623, in get_loc
+    raise KeyError(key) from err
+KeyError: 'start visit datetime'

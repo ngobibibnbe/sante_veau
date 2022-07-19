@@ -196,13 +196,17 @@ interesting_sections = interesting_sections.sort_values(by='start visit dateTime
 interesting_sections["end visit dateTime"]=pd.to_datetime(interesting_sections["end visit dateTime"])
 interesting_sections["start visit dateTime"]=pd.to_datetime(interesting_sections["start visit dateTime"])
 interesting_sections["Duration"]= (interesting_sections["end visit dateTime"] -interesting_sections["start visit dateTime"]).dt.total_seconds()
-interesting_sections["date"]=pd.to_datetime(interesting_sections["start visit dateTime"].dt.date)
-interesting_sections =interesting_sections.where(interesting_sections["start visit datetime"].isin( [datetime(2022, 3, 14), datetime(2022, 3, 21) ]))
-interesting_sections.to_excel("to_read_distribution.xlsx")
-print(interesting_sections.head())
-exit()
+interesting_sections["date2"]=pd.to_datetime(interesting_sections["start visit dateTime"].dt.date)
 
-extract_interesting_sections(interesting_sections)
+interesting_sections.to_excel("to_read_distribution.xlsx")
+interesting_sections =interesting_sections.loc[(interesting_sections["date2"].isin( [datetime(2022, 3, 14), datetime(2022, 3, 21) ]))]
+
+
+
+#interesting_sections =interesting_sections.where(interesting_sections["start visit dateTime"].isin( [datetime(2022, 3, 14), datetime(2022, 3, 21) ]))
+#interesting_sections.to_excel("to_read_distribution.xlsx")
+#exit()
+
 
 """
 ***************************
