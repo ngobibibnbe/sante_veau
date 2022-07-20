@@ -127,12 +127,8 @@ interesting_sections["station"]=interesting_sections["parc"]
 #interesting_sections["station"] =interesting_sections["station"].replace([1,2],[2,1])
 
 interesting_sections["start visit dateTime"]= copy.deepcopy(pd.to_datetime(interesting_sections["date"]))
-#All = copy.deepcopy(interesting_sections)
-#interesting_sections =interesting_sections#[interesting_sections["feederLong"]=="DAL 1 (2494)"]
-
 interesting_sections["end visit dateTime"]= interesting_sections["start visit dateTime"] + pd.to_timedelta(interesting_sections['Duration']+150, unit='s') + pd.to_timedelta(5, unit='h')
 interesting_sections["start visit dateTime"]= pd.to_datetime(interesting_sections["date"])- pd.to_timedelta(90, unit='s') + pd.to_timedelta(5, unit='h')#.agg(' '.join, axis=1))#.dt.time
-#print("sophie*******",interesting_sections.loc[ (interesting_sections["date"].str.contains ("2022-03-06")) & (interesting_sections["calfNumber"]==6371) ])  #["2022-03-06" in str(interesting_sections["date"]) ])# & (interesting_sections["calfNumber"]=="6371")])
 
 interesting_sections = interesting_sections.sort_values(by='start visit dateTime',ascending=True)
 interesting_sections = interesting_sections.sort_values(by='calfNumber',ascending=True)
@@ -166,21 +162,6 @@ print(interesting_sections.head())
 extract_interesting_sections(interesting_sections)
 
 
-#interesting_sections =interesting_sections.where(interesting_sections["start visit dateTime"].isin( [datetime(2022, 3, 14), datetime(2022, 3, 21) ]))
-#interesting_sections.to_excel("to_read_distribution.xlsx")
-#exit()
-
-
-"""
-***************************
-interesting_sections= copy.deepcopy(All)
-
-interesting_sections =interesting_sections[interesting_sections["feederLong"]=="DAL 2 (2496)"]
-interesting_sections.loc[ (interesting_sections["feederLong"]=="DAL 2 (2496)"), "end visit dateTime"]= interesting_sections["start visit dateTime"] + pd.to_timedelta(interesting_sections['Duration']+90, unit='s') + pd.to_timedelta(6, unit='h')
-interesting_sections.loc[ (interesting_sections["feederLong"]=="DAL 2 (2496)"), "start visit dateTime"]= pd.to_datetime(interesting_sections["date"])- pd.to_timedelta(90, unit='s') + pd.to_timedelta(6, unit='h')#.agg(' '.join, axis=1))#.dt.time
-"""
-
-    
 
 
 

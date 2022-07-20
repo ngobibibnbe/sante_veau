@@ -1,0 +1,160 @@
+     station  calfNumber  end visit dateTime  ...    feederLong Duration      date2
+9071       9        6831 2022-03-15 00:53:55  ...  DAL 2 (2496)    685.0 2022-03-15
+8804       9        6829 2022-03-15 01:04:47  ...  DAL 2 (2496)    437.0 2022-03-15
+8426     NaN        6823 2022-03-15 01:05:55  ...  DAL 1 (2494)    325.0 2022-03-15
+9539       9        6832 2022-03-15 01:10:40  ...  DAL 2 (2496)    610.0 2022-03-15
+7489     NaN        6797 2022-03-15 01:14:00  ...  DAL 1 (2494)    690.0 2022-03-15
+
+[5 rows x 7 columns]
+let us check if  vealnum_6831_ch9_from_15032022004230__to__15032022005355 is of interest and isn't already created
+***** yes, it is. we will create vealnum_6831_ch9_from_15032022004230__to__15032022005355.mp4
+we haven't find the sample video so we will go next
+let us check if  vealnum_6829_ch9_from_15032022005730__to__15032022010447 is of interest and isn't already created
+***** yes, it is. we will create vealnum_6829_ch9_from_15032022005730__to__15032022010447.mp4
+we haven't find the sample video so we will go next
+let us check if  vealnum_6823_chnan_from_15032022010030__to__15032022010555 is of interest and isn't already created
+***** yes, it is. we will create vealnum_6823_chnan_from_15032022010030__to__15032022010555.mp4
+we haven't find the sample video so we will go next
+let us check if  vealnum_6832_ch9_from_15032022010030__to__15032022011040 is of interest and isn't already created
+***** yes, it is. we will create vealnum_6832_ch9_from_15032022010030__to__15032022011040.mp4
+we haven't find the sample video so we will go next
+let us check if  vealnum_6797_chnan_from_15032022010230__to__15032022011400 is of interest and isn't already created
+***** yes, it is. we will create vealnum_6797_chnan_from_15032022010230__to__15032022011400.mp4
+we haven't find the sample video so we will go next
+let us check if  vealnum_6836_ch9_from_15032022010730__to__15032022011616 is of interest and isn't already created
+***** yes, it is. we will create vealnum_6836_ch9_from_15032022010730__to__15032022011616.mp4
+we haven't find the sample video so we will go next
+let us check if  vealnum_6407_chnan_from_15032022011030__to__15032022011919 is of interest and isn't already created
+***** yes, it is. we will create vealnum_6407_chnan_from_15032022011030__to__15032022011919.mp4
+we haven't find the sample video so we will go next
+let us check if  vealnum_6432_ch9_from_15032022011930__to__15032022013235 is of interest and isn't already created
+***** yes, it is. we will create vealnum_6432_ch9_from_15032022011930__to__15032022013235.mp4
+we haven't find the sample video so we will go next
+let us check if  vealnum_6796_chnan_from_15032022012330__to__15032022012935 is of interest and isn't already created
+***** yes, it is. we will create vealnum_6796_chnan_from_15032022012330__to__15032022012935.mp4
+we haven't find the sample video so we will go next
+let us check if  vealnum_6796_chnan_from_15032022013130__to__15032022013905 is of interest and isn't already created
+***** yes, it is. we will create vealnum_6796_chnan_from_15032022013130__to__15032022013905.mp4
+we haven't find the sample video so we will go next
+let us check if  vealnum_6796_chnan_from_15032022013930__to__15032022014717 is of interest and isn't already created
+***** yes, it is. we will create vealnum_6796_chnan_from_15032022013930__to__15032022014717.mp4
+we haven't find the sample video so we will go next
+let us check if  vealnum_6796_chnan_from_15032022053530__to__15032022055216 is of interest and isn't already created
+***** yes, it is. we will create vealnum_6796_chnan_from_15032022053530__to__15032022055216.mp4
+we haven't find the sample video so we will go next
+let us check if  vealnum_6412_chnan_from_15032022060130__to__15032022061939 is of interest and isn't already created
+***** yes, it is. we will create vealnum_6412_chnan_from_15032022060130__to__15032022061939.mp4
+we haven't find the sample video so we will go next
+let us check if  vealnum_6391_chnan_from_15032022060830__to__15032022062516 is of interest and isn't already created
+***** yes, it is. we will create vealnum_6391_chnan_from_15032022060830__to__15032022062516.mp4
+we haven't find the sample video so we will go next
+let us check if  vealnum_6426_ch9_from_15032022061330__to__15032022062407 is of interest and isn't already created
+let us check if  vealnum_6404_chnan_from_15032022062030__to__15032022063125 is of interest and isn't already created
+***** yes, it is. we will create vealnum_6404_chnan_from_15032022062030__to__15032022063125.mp4
+we haven't find the sample video so we will go next
+let us check if  vealnum_6766_ch10_from_15032022062130__to__15032022062540 is of interest and isn't already created
+let us check if  vealnum_6766_ch10_from_15032022062330__to__15032022062805 is of interest and isn't already created
+let us check if  vealnum_6766_ch10_from_15032022062630__to__15032022063118 is of interest and isn't already created
+let us check if  vealnum_6800_chnan_from_15032022062730__to__15032022063828 is of interest and isn't already created
+***** yes, it is. we will create vealnum_6800_chnan_from_15032022062730__to__15032022063828.mp4
+we haven't find the sample video so we will go next
+let us check if  vealnum_6393_ch10_from_15032022063330__to__15032022064332 is of interest and isn't already created
+let us check if  vealnum_6823_chnan_from_15032022063730__to__15032022064556 is of interest and isn't already created
+***** yes, it is. we will create vealnum_6823_chnan_from_15032022063730__to__15032022064556.mp4
+we haven't find the sample video so we will go next
+let us check if  vealnum_6407_chnan_from_15032022064330__to__15032022065439 is of interest and isn't already created
+***** yes, it is. we will create vealnum_6407_chnan_from_15032022064330__to__15032022065439.mp4
+we haven't find the sample video so we will go next
+let us check if  vealnum_6760_ch10_from_15032022064730__to__15032022065242 is of interest and isn't already created
+let us check if  vealnum_6829_ch9_from_15032022064830__to__15032022065903 is of interest and isn't already created
+let us check if  vealnum_6760_ch10_from_15032022064930__to__15032022065346 is of interest and isn't already created
+let us check if  vealnum_6760_ch10_from_15032022064930__to__15032022065354 is of interest and isn't already created
+let us check if  vealnum_6760_ch10_from_15032022065230__to__15032022065648 is of interest and isn't already created
+let us check if  vealnum_6831_ch9_from_15032022065530__to__15032022070645 is of interest and isn't already created
+let us check if  vealnum_6760_ch10_from_15032022070030__to__15032022070445 is of interest and isn't already created
+let us check if  vealnum_6760_ch10_from_15032022070030__to__15032022070436 is of interest and isn't already created
+let us check if  vealnum_6760_ch10_from_15032022070130__to__15032022070540 is of interest and isn't already created
+let us check if  vealnum_6760_ch10_from_15032022070230__to__15032022070639 is of interest and isn't already created
+let us check if  vealnum_6799_chnan_from_15032022070230__to__15032022072132 is of interest and isn't already created
+***** yes, it is. we will create vealnum_6799_chnan_from_15032022070230__to__15032022072132.mp4
+we haven't find the sample video so we will go next
+let us check if  vealnum_6760_ch10_from_15032022070430__to__15032022070836 is of interest and isn't already created
+let us check if  vealnum_6385_ch10_from_15032022070630__to__15032022071047 is of interest and isn't already created
+let us check if  vealnum_6432_ch9_from_15032022070730__to__15032022071354 is of interest and isn't already created
+let us check if  vealnum_6760_ch10_from_15032022070830__to__15032022071247 is of interest and isn't already created
+let us check if  vealnum_6760_ch10_from_15032022070830__to__15032022071246 is of interest and isn't already created
+let us check if  vealnum_6385_ch10_from_15032022070930__to__15032022071400 is of interest and isn't already created
+let us check if  vealnum_6385_ch10_from_15032022070930__to__15032022071346 is of interest and isn't already created
+let us check if  vealnum_6760_ch10_from_15032022071030__to__15032022071642 is of interest and isn't already created
+let us check if  vealnum_6841_ch9_from_15032022071230__to__15032022072649 is of interest and isn't already created
+let us check if  vealnum_6760_ch10_from_15032022072330__to__15032022072932 is of interest and isn't already created
+let us check if  vealnum_6760_ch10_from_15032022072530__to__15032022072944 is of interest and isn't already created
+let us check if  vealnum_6760_ch10_from_15032022072630__to__15032022073039 is of interest and isn't already created
+let us check if  vealnum_6760_ch10_from_15032022073530__to__15032022074624 is of interest and isn't already created
+let us check if  vealnum_6405_chnan_from_15032022073830__to__15032022075213 is of interest and isn't already created
+***** yes, it is. we will create vealnum_6405_chnan_from_15032022073830__to__15032022075213.mp4
+we haven't find the sample video so we will go next
+let us check if  vealnum_6403_chnan_from_15032022075030__to__15032022080040 is of interest and isn't already created
+***** yes, it is. we will create vealnum_6403_chnan_from_15032022075030__to__15032022080040.mp4
+we haven't find the sample video so we will go next
+let us check if  vealnum_6787_chnan_from_15032022075630__to__15032022080423 is of interest and isn't already created
+***** yes, it is. we will create vealnum_6787_chnan_from_15032022075630__to__15032022080423.mp4
+we haven't find the sample video so we will go next
+let us check if  vealnum_6809_chnan_from_15032022080030__to__15032022081307 is of interest and isn't already created
+***** yes, it is. we will create vealnum_6809_chnan_from_15032022080030__to__15032022081307.mp4
+we haven't find the sample video so we will go next
+let us check if  vealnum_6432_ch9_from_15032022082430__to__15032022083435 is of interest and isn't already created
+let us check if  vealnum_6797_chnan_from_15032022082630__to__15032022084350 is of interest and isn't already created
+***** yes, it is. we will create vealnum_6797_chnan_from_15032022082630__to__15032022084350.mp4
+we haven't find the sample video so we will go next
+let us check if  vealnum_6846_ch9_from_15032022083030__to__15032022083841 is of interest and isn't already created
+***** yes, it is. we will create vealnum_6846_ch9_from_15032022083030__to__15032022083841.mp4
+hi ../../sante_veau/videos/2022-03-12-2022-03-17/N862A6_ch9_main_20220315080008_20220315090008.mp4
+True 2022-03-15 08:30:30 2022-03-15 08:00:08
+** 1822.0 2313.0 the rest is -1287.0
+we crop
+Moviepy - Building video ../../sante_veau/dataset/coupure_video_veaux/15032022/vealnum_6846_ch9_from_15032022083030__to__15032022083841.mp4.
+MoviePy - Writing audio in vealnum_6846_ch9_from_15032022083030__to__15032022083841TEMP_MPY_wvf_snd.mp3
+chunk:   0%|          | 0/10827 [00:00<?, ?it/s, now=None]chunk:   0%|          | 2/10827 [00:00<09:26, 19.09it/s, now=None]chunk:   1%|▏         | 139/10827 [00:00<00:13, 795.65it/s, now=None]chunk:   3%|▎         | 306/10827 [00:00<00:08, 1186.07it/s, now=None]chunk:   4%|▍         | 460/10827 [00:00<00:07, 1309.55it/s, now=None]chunk:   6%|▌         | 632/10827 [00:00<00:07, 1453.08it/s, now=None]chunk:   7%|▋         | 793/10827 [00:00<00:06, 1502.71it/s, now=None]chunk:   9%|▉         | 954/10827 [00:00<00:06, 1536.57it/s, now=None]chunk:  10%|█         | 1117/10827 [00:00<00:06, 1563.64it/s, now=None]chunk:  12%|█▏        | 1276/10827 [00:00<00:06, 1570.60it/s, now=None]chunk:  13%|█▎        | 1444/10827 [00:01<00:05, 1603.00it/s, now=None]Traceback (most recent call last):
+  File "/project/166600234/sophie/our_virtual_envs/dlc/venv/lib/python3.8/site-packages/moviepy/audio/io/ffmpeg_audiowriter.py", line 74, in write_frames
+    self.proc.stdin.write(frames_array.tobytes())
+BrokenPipeError: [Errno 32] Broken pipe
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "crop_videos_decallage.py", line 166, in <module>
+    extract_interesting_sections(interesting_sections)
+  File "crop_videos_decallage.py", line 112, in extract_interesting_sections
+    video.write_videofile(path+"/"+new_name+".mp4",fps=25)
+  File "<decorator-gen-55>", line 2, in write_videofile
+  File "/project/166600234/sophie/our_virtual_envs/dlc/venv/lib/python3.8/site-packages/moviepy/decorators.py", line 54, in requires_duration
+    return f(clip, *a, **k)
+  File "<decorator-gen-54>", line 2, in write_videofile
+  File "/project/166600234/sophie/our_virtual_envs/dlc/venv/lib/python3.8/site-packages/moviepy/decorators.py", line 135, in use_clip_fps_by_default
+    return f(clip, *new_a, **new_kw)
+  File "<decorator-gen-53>", line 2, in write_videofile
+  File "/project/166600234/sophie/our_virtual_envs/dlc/venv/lib/python3.8/site-packages/moviepy/decorators.py", line 22, in convert_masks_to_RGB
+    return f(clip, *a, **k)
+  File "/project/166600234/sophie/our_virtual_envs/dlc/venv/lib/python3.8/site-packages/moviepy/video/VideoClip.py", line 293, in write_videofile
+    self.audio.write_audiofile(audiofile, audio_fps,
+  File "<decorator-gen-45>", line 2, in write_audiofile
+  File "/project/166600234/sophie/our_virtual_envs/dlc/venv/lib/python3.8/site-packages/moviepy/decorators.py", line 54, in requires_duration
+    return f(clip, *a, **k)
+  File "/project/166600234/sophie/our_virtual_envs/dlc/venv/lib/python3.8/site-packages/moviepy/audio/AudioClip.py", line 206, in write_audiofile
+    return ffmpeg_audiowrite(self, filename, fps, nbytes, buffersize,
+  File "<decorator-gen-9>", line 2, in ffmpeg_audiowrite
+  File "/project/166600234/sophie/our_virtual_envs/dlc/venv/lib/python3.8/site-packages/moviepy/decorators.py", line 54, in requires_duration
+    return f(clip, *a, **k)
+  File "/project/166600234/sophie/our_virtual_envs/dlc/venv/lib/python3.8/site-packages/moviepy/audio/io/ffmpeg_audiowriter.py", line 170, in ffmpeg_audiowrite
+    writer.write_frames(chunk)
+  File "/project/166600234/sophie/our_virtual_envs/dlc/venv/lib/python3.8/site-packages/moviepy/audio/io/ffmpeg_audiowriter.py", line 117, in write_frames
+    raise IOError(error)
+OSError: [Errno 32] Broken pipe
+
+MoviePy error: FFMPEG encountered the following error while writing file vealnum_6846_ch9_from_15032022083030__to__15032022083841TEMP_MPY_wvf_snd.mp3:
+
+b'av_interleaved_write_frame(): Disk quota exceeded\nError writing trailer of vealnum_6846_ch9_from_15032022083030__to__15032022083841TEMP_MPY_wvf_snd.mp3: Disk quota exceeded'
+
+In case it helps, make sure you are using a recent version of FFMPEG (the versions in the Ubuntu/Debian repos are deprecated).
+                                                                       
