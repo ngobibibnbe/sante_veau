@@ -1,3 +1,13 @@
+
+
+
+
+
+
+
+
+
+
 import pandas as pd
 import os
 path ="../../sante_veau/dataset/coupure_video_veaux"

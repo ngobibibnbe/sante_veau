@@ -1,0 +1,14 @@
+      station  calfNumber  ... Duration      date2
+22552       9        6831  ...    685.0 2022-03-15
+5217      NaN        6405  ...    655.0 2022-03-15
+15468     NaN        6780  ...    247.0 2022-03-15
+21470       9        6829  ...    437.0 2022-03-15
+15470     NaN        6780  ...    668.0 2022-03-15
+
+[5 rows x 7 columns]
+Traceback (most recent call last):
+  File "crop_videos_decallage.py", line 161, in <module>
+    extract_interesting_sections(interesting_sections)
+  File "crop_videos_decallage.py", line 30, in extract_interesting_sections
+    availabe_video["names"]=name
+NameError: name 'availabe_video' is not defined
