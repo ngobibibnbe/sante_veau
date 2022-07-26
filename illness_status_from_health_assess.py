@@ -37,7 +37,7 @@ for sheet in df.sheet_names:
     if   len(re.findall("^Jour \d+$", sheet))!=0:
         print(sheet)
         eval_day=sheet.split("Jour ")[-1]
-        date=datetime(2022,2,14)+ timedelta(days=int(eval_day))
+        date=datetime(2022,2,13)+ timedelta(days=int(eval_day))
         #print(df.parse(sheet_name=sheet))
         try:
             df_sheet=get_ill(file,sheet)
@@ -45,7 +45,7 @@ for sheet in df.sheet_names:
             print(e)
             continue
         df_sheet["date"]=[date for i in range(df_sheet.shape[0])]
-        if not result.empty:
+        if  result.empty:
             result=df_sheet
         else:
             result = pd.concat([result, df_sheet],  ignore_index=True)

@@ -9,7 +9,6 @@ import numpy as np
 import os
 import  copy
 
-
 #########################################################
 ######pretraitement necessaire pour les correspondances## 
 #########################################################
@@ -19,7 +18,9 @@ def extract_interesting_sections(interesting_sections):
     availabe_videos=pd.DataFrame(columns=["names","start time","end time"])
     #we shall store all the file names in this list
     filelist = []
-    paths =["../../sante_veau/videos/2022-03-12-2022-03-17","../../sante_veau/videos/2022-03-18-2022-03-23"]
+    #paths =["../../sante_veau/videos/2022-03-12-2022-03-17","../../sante_veau/videos/2022-03-18-2022-03-23"]
+    paths =["../../sante_veau/videos/"+folder for folder in os.listdir("../../sante_veau/videos") if "$" not in folder]
+    print(paths)
     for path in paths: 
         for root, dirs, files in os.walk(path):
             for file in files:
@@ -40,8 +41,11 @@ def extract_interesting_sections(interesting_sections):
     #############        Extracting videos        ###########
     #############                                 ###########
 
-    def crop_video(video_name, new_name, start, end):
-        video = VideoFileClip(video_name).subclip(start,end)
+    def crop_video(video_name, new_name, start, end=None):
+        if end!=None:
+            video = VideoFileClip(video_name).subclip(start,end)
+        else:
+            video = VideoFileClip(video_name).subclip(start)
         return video
         
 
@@ -61,7 +65,7 @@ def extract_interesting_sections(interesting_sections):
                     print("**",start,end, "the rest is", rest)
 
                     if rest>0:
-                        video = crop_video(availabe_video["names"], interesting_section["start visit dateTime"].strftime("%d%m%Y%H%M%S")+"__to__"+interesting_section["end visit dateTime"].strftime("%d%m%Y%H%M%S"), start, end_video )
+                        video = crop_video(availabe_video["names"], interesting_section["start visit dateTime"].strftime("%d%m%Y%H%M%S")+"__to__"+interesting_section["end visit dateTime"].strftime("%d%m%Y%H%M%S"), start )
                         print("we should take in another video")
                         rest_interesting_section=copy.deepcopy(interesting_section)
                         rest_interesting_section["start visit dateTime"]= availabe_video["end time"]+pd.to_timedelta(1, unit='s')
@@ -94,7 +98,7 @@ def extract_interesting_sections(interesting_sections):
         new_name="vealnum_"+str(interesting_section["calfNumber"])+"_ch"+str(interesting_section["station"])+"_from_"+interesting_section["start visit dateTime"].strftime("%d%m%Y%H%M%S")+"__to__"+interesting_section["end visit dateTime"].strftime("%d%m%Y%H%M%S")
         path= "../../sante_veau/dataset/coupure_video_veaux/"+interesting_section["start visit dateTime"].strftime("%d%m%Y")
         print("let us check if ",new_name, "is of interest and isn't already created")
-        if (path+"/"+new_name+".mp4" not in filelist) and (pd.to_datetime(interesting_section["start visit dateTime"].date()) in [datetime(2022, 3, 28)]) :#,datetime(2022, 2, 20), datetime(2022, 2, 27) datetime(2022, 3, 6), datetime(2022, 3,13)] :
+        if (path+"/"+new_name+".mp4" not in filelist) and (pd.to_datetime(interesting_section["start visit dateTime"].date()) in  [datetime(2022, 2, 14),datetime(2022, 2, 16),datetime(2022, 2, 18), datetime(2022, 2, 20), datetime(2022, 2, 22), datetime(2022, 2, 24), datetime(2022, 2, 27), datetime(2022, 2, 28), datetime(2022, 3, 2), datetime(2022, 3, 4),datetime(2022, 3,6), datetime(2022, 3, 8),datetime(2022, 3, 10),datetime(2022, 3, 28),datetime(2022, 3, 30),datetime(2022, 4, 1),datetime(2022, 4, 4),datetime(2022, 4, 6),datetime(2022, 4, 8),datetime(2022, 4, 15) ]) :#,datetime(2022, 2, 20), datetime(2022, 2, 27) datetime(2022, 3, 6), datetime(2022, 3,13)] :
             print("***** yes, it is. we will create",new_name+".mp4")
             video= search_interesting_section(interesting_section)
             if video!=None :
@@ -108,12 +112,13 @@ def extract_interesting_sections(interesting_sections):
                 if not isLExist:
                     os.makedirs(path2)
                     print("The dataset directory is created!")
+                print("******are createting","sante_veau/dataset/coupure_video_veaux/"+interesting_section["start visit dateTime"].strftime("%d%m%Y")+"/"+new_name, "***********FPS",video.fps)
 
-                video.write_videofile(path+"/"+new_name+".mp4",fps=25)
-                print("******created","sante_veau/dataset/coupure_video_veaux/"+interesting_section["start visit dateTime"].strftime("%d%m%Y")+"/"+new_name, "***********FPS",video.fps)
+                video.write_videofile(path+"/"+new_name+".mp4")#,fps=25)
             else:
                 print("we haven't find the sample video so we will go next")
-
+    
+        print("we finished the treatment")
 import copy
 interesting_sections=pd.read_csv("../louves/visits_point.csv", sep=";")
 interesting_sections=interesting_sections.loc[interesting_sections['Duration'] !=0]
@@ -157,7 +162,7 @@ interesting_sections["start visit dateTime"]=pd.to_datetime(interesting_sections
 interesting_sections["Duration"]= (interesting_sections["end visit dateTime"] -interesting_sections["start visit dateTime"]).dt.total_seconds()
 interesting_sections["date2"]=pd.to_datetime(interesting_sections["start visit dateTime"].dt.date)
 
-interesting_sections =interesting_sections.loc[(interesting_sections["date2"].isin( [datetime(2022, 3, 28) ]))]
+interesting_sections =interesting_sections.loc[(interesting_sections["date2"].isin( [datetime(2022, 2, 14),datetime(2022, 2, 16),datetime(2022, 2, 18), datetime(2022, 2, 20), datetime(2022, 2, 22), datetime(2022, 2, 24), datetime(2022, 2, 27), datetime(2022, 2, 28), datetime(2022, 3, 2), datetime(2022, 3, 4),datetime(2022, 3,6), datetime(2022, 3, 8),datetime(2022, 3, 10),datetime(2022, 3, 28),datetime(2022, 3, 30),datetime(2022, 4, 1),datetime(2022, 4, 4),datetime(2022, 4, 6),datetime(2022, 4, 8),datetime(2022, 4, 15) ]))]
 print(interesting_sections.head())
 extract_interesting_sections(interesting_sections)
 

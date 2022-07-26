@@ -19,7 +19,8 @@ def extract_interesting_sections(interesting_sections):
     availabe_videos=pd.DataFrame(columns=["names","start time","end time"])
     #we shall store all the file names in this list
     filelist = []
-    paths =["../../sante_veau/videos/2022-03-12-2022-03-17","../../sante_veau/videos/2022-03-18-2022-03-23"]
+    #paths =["../../sante_veau/videos/2022-03-12-2022-03-17","../../sante_veau/videos/2022-03-18-2022-03-23"]
+    paths =["../../sante_veau/videos/"+folder for folder in os.listdir("../../sante_veau/videos") if "$" not in folder]
     for path in paths: 
         for root, dirs, files in os.walk(path):
             for file in files:
@@ -94,7 +95,7 @@ def extract_interesting_sections(interesting_sections):
         new_name="vealnum_"+str(interesting_section["calfNumber"])+"_ch"+str(interesting_section["station"])+"_from_"+interesting_section["start visit dateTime"].strftime("%d%m%Y%H%M%S")+"__to__"+interesting_section["end visit dateTime"].strftime("%d%m%Y%H%M%S")
         path= "../../sante_veau/dataset/coupure_video_veaux/"+interesting_section["start visit dateTime"].strftime("%d%m%Y")
         print("let us check if ",new_name, "is of interest and isn't already created")
-        if (path+"/"+new_name+".mp4" not in filelist) and (pd.to_datetime(interesting_section["start visit dateTime"].date()) in [datetime(2022, 3, 15), datetime(2022, 3, 21) ]) :#,datetime(2022, 2, 20), datetime(2022, 2, 27) datetime(2022, 3, 6), datetime(2022, 3,13)] :
+        if (path+"/"+new_name+".mp4" not in filelist) and (pd.to_datetime(interesting_section["start visit dateTime"].date()) in [datetime(2022, 3, 15),datetime(2022, 3, 18),datetime(2022, 3, 21),datetime(2022, 3, 23),datetime(2022, 3, 25) ]) :#,datetime(2022, 2, 20), datetime(2022, 2, 27) datetime(2022, 3, 6), datetime(2022, 3,13)] :
             print("***** yes, it is. we will create",new_name+".mp4")
             video= search_interesting_section(interesting_section)
             if video!=None :
@@ -113,6 +114,8 @@ def extract_interesting_sections(interesting_sections):
                 print("******created","sante_veau/dataset/coupure_video_veaux/"+interesting_section["start visit dateTime"].strftime("%d%m%Y")+"/"+new_name, "***********FPS",video.fps)
             else:
                 print("we haven't find the sample video so we will go next")
+        else:
+            print("the video have been done in one of previous executions")
 
 import copy
 interesting_sections=pd.read_csv("../louves/visits_point.csv", sep=";")
@@ -161,7 +164,7 @@ interesting_sections["start visit dateTime"]=pd.to_datetime(interesting_sections
 interesting_sections["Duration"]= (interesting_sections["end visit dateTime"] -interesting_sections["start visit dateTime"]).dt.total_seconds()
 interesting_sections["date2"]=pd.to_datetime(interesting_sections["start visit dateTime"].dt.date)
 
-interesting_sections =interesting_sections.loc[(interesting_sections["date2"].isin( [datetime(2022, 3, 15), datetime(2022, 3, 21) ]))]
+interesting_sections =interesting_sections.loc[(interesting_sections["date2"].isin( [datetime(2022, 3, 15),datetime(2022, 3, 18),datetime(2022, 3, 21),datetime(2022, 3, 23),datetime(2022, 3, 25) ]))]
 print(interesting_sections.head())
 extract_interesting_sections(interesting_sections)
 
