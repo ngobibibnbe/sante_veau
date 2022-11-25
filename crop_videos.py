@@ -98,7 +98,8 @@ def extract_interesting_sections(interesting_sections):
         new_name="vealnum_"+str(interesting_section["calfNumber"])+"_ch"+str(interesting_section["station"])+"_from_"+interesting_section["start visit dateTime"].strftime("%d%m%Y%H%M%S")+"__to__"+interesting_section["end visit dateTime"].strftime("%d%m%Y%H%M%S")
         path= "../../sante_veau/dataset/coupure_video_veaux/"+interesting_section["start visit dateTime"].strftime("%d%m%Y")
         print("let us check if ",new_name, "is of interest and isn't already created")
-        if (path+"/"+new_name+".mp4" not in filelist) and (pd.to_datetime(interesting_section["start visit dateTime"].date()) in  [datetime(2022, 2, 14),datetime(2022, 2, 16),datetime(2022, 2, 18), datetime(2022, 2, 20), datetime(2022, 2, 22), datetime(2022, 2, 24), datetime(2022, 2, 27), datetime(2022, 2, 28), datetime(2022, 3, 2), datetime(2022, 3, 4),datetime(2022, 3,6), datetime(2022, 3, 8),datetime(2022, 3, 10),datetime(2022, 3, 28),datetime(2022, 3, 30),datetime(2022, 4, 1),datetime(2022, 4, 4),datetime(2022, 4, 6),datetime(2022, 4, 8),datetime(2022, 4, 15) ]) :#,datetime(2022, 2, 20), datetime(2022, 2, 27) datetime(2022, 3, 6), datetime(2022, 3,13)] :
+        if (path+"/"+new_name+".mp4" not in filelist) and (pd.to_datetime(interesting_section["start visit dateTime"].date()) in [  datetime(2022, 2, 27), datetime(2022, 2, 28), datetime(2022, 3, 2), datetime(2022, 3, 4),datetime(2022, 3,6), datetime(2022, 3, 8),datetime(2022, 3, 10),datetime(2022, 3, 28),datetime(2022, 3, 30),datetime(2022, 4, 1),datetime(2022, 4, 4),datetime(2022, 4, 6),datetime(2022, 4, 8),datetime(2022, 4, 15) ]) :# #[datetime(2022, 2, 14),datetime(2022, 2, 16),datetime(2022, 2, 18), datetime(2022, 2, 20), datetime(2022, 2, 22), datetime(2022, 2, 24), datetime(2022, 2, 27), datetime(2022, 2, 28), datetime(2022, 3, 2), datetime(2022, 3, 4),datetime(2022, 3,6), datetime(2022, 3, 8),datetime(2022, 3, 10),datetime(2022, 3, 28),datetime(2022, 3, 30),datetime(2022, 4, 1),datetime(2022, 4, 4),datetime(2022, 4, 6),datetime(2022, 4, 8),datetime(2022, 4, 15) ]) :#
+            #,datetime(2022, 2, 20), datetime(2022, 2, 27) datetime(2022, 3, 6), datetime(2022, 3,13)] :
             print("***** yes, it is. we will create",new_name+".mp4")
             video= search_interesting_section(interesting_section)
             if video!=None :
@@ -132,27 +133,22 @@ interesting_sections["station"]=interesting_sections["parc"]
 #interesting_sections["station"] =interesting_sections["station"].replace([1,2],[2,1])
 
 interesting_sections["start visit dateTime"]= copy.deepcopy(pd.to_datetime(interesting_sections["date"]))
-interesting_sections["end visit dateTime"]= interesting_sections["start visit dateTime"] + pd.to_timedelta(interesting_sections['Duration']+150, unit='s') + pd.to_timedelta(5, unit='h')
-interesting_sections["start visit dateTime"]= pd.to_datetime(interesting_sections["date"])- pd.to_timedelta(90, unit='s') + pd.to_timedelta(5, unit='h')#.agg(' '.join, axis=1))#.dt.time
+interesting_sections["end visit dateTime"]= interesting_sections["start visit dateTime"] + pd.to_timedelta(interesting_sections['Duration']+150, unit='s') + pd.to_timedelta(6, unit='h')
+interesting_sections["start visit dateTime"]= pd.to_datetime(interesting_sections["date"])- pd.to_timedelta(90, unit='s') + pd.to_timedelta(6, unit='h')#.agg(' '.join, axis=1))#.dt.time
 
-interesting_sections = interesting_sections.sort_values(by='start visit dateTime',ascending=True)
-interesting_sections = interesting_sections.sort_values(by='calfNumber',ascending=True)
+interesting_sections= interesting_sections.sort_values(['calfNumber','start visit dateTime'],ascending=True).groupby(('calfNumber')).head(interesting_sections.shape[0])
 
 interesting_sections=interesting_sections[[ "station", "calfNumber","end visit dateTime","start visit dateTime" ,"feederLong"]]
 interesting_sections.reset_index(drop=True, inplace=True)
+#pd.set_option('display.max_rows', None)
 
 to_drop=[]
 for idx in interesting_sections.index.values[:-1] :
-    if interesting_sections.iloc[idx]["calfNumber"]== interesting_sections.iloc[idx+1]["calfNumber"] and interesting_sections.iloc[idx]["end visit dateTime"]>= interesting_sections.iloc[idx+1]["start visit dateTime"]- pd.to_timedelta(5, unit='s'):  # en gros 90s + 90s de marge d'après les lignes 175 ete 176
-        interesting_sections.iloc[idx+1]["start visit dateTime"] =  interesting_sections.iloc[idx]["start visit dateTime"]
+    if interesting_sections.iloc[idx]["calfNumber"]== interesting_sections.iloc[idx+1]["calfNumber"] and interesting_sections.iloc[idx]["end visit dateTime"]>= interesting_sections.iloc[idx+1]["start visit dateTime"]- pd.to_timedelta(3, unit='min'):  # en gros 90s + 90s de marge d'après les lignes 175 ete 176
+        interesting_sections["start visit dateTime"].iloc[idx+1] =  interesting_sections.iloc[idx]["start visit dateTime"]
+        #print(interesting_sections.iloc[idx+1]["start visit dateTime"] ,  interesting_sections.iloc[idx]["start visit dateTime"])
         to_drop.append(idx)
-    elif interesting_sections.iloc[idx]["calfNumber"]== interesting_sections.iloc[idx+1]["calfNumber"] and interesting_sections.iloc[idx]["start visit dateTime"]== interesting_sections.iloc[idx+1]["start visit dateTime"]: 
-        first_end=interesting_sections.iloc[idx]["end visit dateTime"]
-        second_end=interesting_sections.iloc[idx+1]["end visit dateTime"]
-        interesting_sections.iloc[idx+1]["end visit dateTime"] = first_end if  first_end > second_end else second_end
-        print("***",interesting_sections.iloc[idx+1]["end visit dateTime"]) 
-        to_drop.append(idx)
-        
+
 interesting_sections.drop(index=to_drop, inplace=True)
 
 interesting_sections.reset_index(drop=True, inplace=True)
@@ -163,7 +159,6 @@ interesting_sections["Duration"]= (interesting_sections["end visit dateTime"] -i
 interesting_sections["date2"]=pd.to_datetime(interesting_sections["start visit dateTime"].dt.date)
 
 interesting_sections =interesting_sections.loc[(interesting_sections["date2"].isin( [datetime(2022, 2, 14),datetime(2022, 2, 16),datetime(2022, 2, 18), datetime(2022, 2, 20), datetime(2022, 2, 22), datetime(2022, 2, 24), datetime(2022, 2, 27), datetime(2022, 2, 28), datetime(2022, 3, 2), datetime(2022, 3, 4),datetime(2022, 3,6), datetime(2022, 3, 8),datetime(2022, 3, 10),datetime(2022, 3, 28),datetime(2022, 3, 30),datetime(2022, 4, 1),datetime(2022, 4, 4),datetime(2022, 4, 6),datetime(2022, 4, 8),datetime(2022, 4, 15) ]))]
-print(interesting_sections.head())
 extract_interesting_sections(interesting_sections)
 
 

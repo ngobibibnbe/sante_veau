@@ -1,16 +1,10 @@
-
-
-
-
-
-
-
-
-
-
 import pandas as pd
 import os
-path ="../../sante_veau/dataset/coupure_video_veaux"
+import illness_status_from_health_assess
+illness_status_from_health_assess.illness_status()
+
+
+path ="/home/ulaval.ca/amngb2/projects/ul-val-prj-def-erpaq33/sante_veau/dataset/coupure_video_veaux"
 availabel_videos=pd.DataFrame(columns=["names","start visit dateTime","end visit dateTime","calfNumber","station","Duration"])
 #we shall store all the file names in this list
 
@@ -18,16 +12,18 @@ filelist = []
 for root, dirs, files in os.walk(path):
     for file in files:
         #append the file name to the list
+        print(os.path.join(root,file))
         filelist.append(os.path.join(root,file))
 
 #print(filelist)
 
 for name in filelist:
     availabel_video = {}
+    full_name=name
     name = name.split("vealnum")[1]
     availabel_video["calfNumber"]= name.split("_")[1]
     availabel_video["station"]= name.split("_")[2][2:]
-    availabel_video["names"]=name
+    availabel_video["names"]=full_name
     availabel_video["end visit dateTime"]=name.split(".mp4")[0].split("_")[-1] #for name in  availabel_videos["names"].values]
     availabel_video["start visit dateTime"]=name.split(".mp4")[0].split("_")[4]  #for name in  availabel_videos["names"].values]
 
