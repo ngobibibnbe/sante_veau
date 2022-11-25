@@ -48,8 +48,12 @@ illness=pd.read_csv("illness.csv")
 illness[["No ATQ"]].astype(int)
 illness["date"] = illness["date"].astype(str)
 
-availabel_videos = pd.merge(availabel_videos, illness, left_on=['calfNumber','date'], right_on = ['No ATQ','date'],  how='left')# we take left to be sure some veal heven't been forgoten during the evaluation
 
-print(availabel_videos.head())
+
+
+
 availabel_videos.to_csv("to_read_distribution.csv")
 availabel_videos.to_excel("to_read_distribution.xlsx")
+
+
+print("*********************")
